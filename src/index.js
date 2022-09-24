@@ -56,13 +56,20 @@ async function onClickLoadMore() {
             Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
             return;
         }
-        render(data);
+        
+        render(data);        
     }
     catch (error) {
         console.log(error);        
     }   
     
     btnRef.style.opacity = 1;
+        
+    const { height: cardHeight } = document.querySelector(".gallery").firstElementChild.getBoundingClientRect();
+    window.scrollBy({
+    top: cardHeight * 2,
+    behavior: "smooth",
+    });
 }
 
 function render(data) {       
@@ -74,7 +81,7 @@ function render(data) {
     
     galleryRef.insertAdjacentHTML("beforeend", markup);
        
-    lightbox.refresh();
+    lightbox.refresh();    
 }
 
 async function getData(pageNum) {

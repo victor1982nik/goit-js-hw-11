@@ -26,8 +26,12 @@ async function handlerFormSubmit(e) {
     galleryRef.innerHTML = '';
     
     try {
+        if (input.value === '') {
+            Notiflix.Notify.warning("Sorry, there are no images matching your search query. Please try again.");
+            return;
+        }            
         const data = await getData(pageNumber);
-        if (data.hits.length === 0) {
+        if (data.hits.length === 0  ) {
             Notiflix.Notify.warning("Sorry, there are no images matching your search query. Please try again.");
             return;
         }
